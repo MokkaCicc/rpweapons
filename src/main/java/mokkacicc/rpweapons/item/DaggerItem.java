@@ -8,16 +8,15 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class DaggerItem extends ToolItem implements EnchantmentHandler {
     public final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
@@ -31,6 +30,13 @@ public class DaggerItem extends ToolItem implements EnchantmentHandler {
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Tool modifier", attackSpeed, EntityAttributeModifier.Operation.ADDITION));
         builder.put(ReachEntityAttributes.ATTACK_RANGE, new EntityAttributeModifier("Attack range", -1.0D, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
+    }
+
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, e -> {
+            e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
+        });
+        return true;
     }
 
     @Override

@@ -1,9 +1,5 @@
-# Fabric Example Mod
+# RP Weapons
 
-## Setup
-
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This a lightweight fabric mod that add dagger and spears.
+This is mainly to learn how to mod and how gradle work, I do not plan to release it on curseforge.
+All sprites and enchanting logic cames from the [Gate of Babylon mod](https://github.com/Draylar/gate-of-babylon) and this is a far better mod than this.
